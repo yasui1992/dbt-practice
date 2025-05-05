@@ -6,8 +6,6 @@ on:
 jobs:
   gitleaks-scan:
     runs-on: ubuntu-latest
-    permissions:
-      pull_requests: read
     steps:
       - uses: actions/checkout@v4
         with:
