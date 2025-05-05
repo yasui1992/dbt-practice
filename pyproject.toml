@@ -2,4 +2,7 @@
 name = "dbt-practice"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "dbt-duckdb>=1.9.0,<1.10",
+    "duckdb>=1.2.2,<1.3",
+]

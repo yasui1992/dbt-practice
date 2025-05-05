@@ -1,0 +1,7 @@
+dbt_practice:
+  outputs:
+    dev:
+      type: duckdb
+      threads: 1
+
+  target: dev
