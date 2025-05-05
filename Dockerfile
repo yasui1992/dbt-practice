@@ -21,11 +21,10 @@ USER ${USERNAME}
 FROM python-base AS duckdb-builder
 ARG DUCKDB_CLI_DIST_URL="https://github.com/duckdb/duckdb/releases/download/v1.2.2/duckdb_cli-linux-amd64.gz"
 
-RUN --mount=type=cache,target=/var/cache/apt \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get update \
  && apt-get install -y --no-install-recommends \
-    curl \
-    git
+    curl
 
 RUN mkdir -p /opt/duckdb/bin \
  && curl -L ${DUCKDB_CLI_DIST_URL} | zcat > /opt/duckdb/bin/duckdb \
@@ -35,6 +34,12 @@ RUN mkdir -p /opt/duckdb/bin \
 FROM python-base AS app-builder
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
+# Require Git for dbt operations
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    apt-get update \
+ && apt-get install -y --no-install-recommends \
+    git
+
 RUN --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=cache,target=${UV_CACHE_DIR},sharing=locked \
@@ -43,14 +48,21 @@ RUN --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
 COPY . /app
 
 
-FROM python-nonroot AS final
+FROM python-nonroot AS app-final
 
-COPY --from=duckdb-builder /opt/duckdb /opt/duckdb
-COPY --from=duckdb-builder /usr/bin/git /usr/bin/git
-
+COPY --from=app-builder /usr/bin/git /usr/bin/git
 COPY --from=app-builder /usr/bin/uv /usr/bin/uvx /usr/bin/
 COPY --from=app-builder --chown=${UID}:${GID} /app /app
 
 WORKDIR /app/dbt
-
 CMD [ "dbt", "debug" ]
+
+
+FROM python-nonroot AS duckdb-final
+
+COPY --from=duckdb-builder /opt/duckdb /opt/duckdb
+
+COPY --from=app-builder --chown=${UID}:${GID} /app /app
+
+WORKDIR /app
+CMD [ "duckdb" ]
