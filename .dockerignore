@@ -26,3 +26,6 @@ __pycache__/
 
 # Python virtual environments
 .venv*
+
+# Local db directory
+db/
