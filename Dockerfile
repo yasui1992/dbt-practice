@@ -58,11 +58,26 @@ WORKDIR /app/dbt
 CMD [ "dbt", "debug" ]
 
 
-FROM python-nonroot AS duckdb-final
+FROM python-nonroot AS app-docs-final
+WORKDIR /app
 
-COPY --from=duckdb-builder /opt/duckdb /opt/duckdb
+ENV DBT_PROFILES_DIR=/app/dbt \
+    DBT_PROJECT_DIR=/app/dbt
 
+COPY --from=app-builder /usr/bin/git /usr/bin/git
+COPY --from=app-builder /usr/bin/uv /usr/bin/uvx /usr/bin/
 COPY --from=app-builder --chown=${UID}:${GID} /app /app
 
+RUN dbt docs generate
+
+EXPOSE 8000
+CMD [ "dbt", "docs", "serve", "--host", "0.0.0.0", "--port", "8000", "--no-browser" ]
+
+
+FROM python-nonroot AS duckdb-final
 WORKDIR /app
+
+COPY --from=duckdb-builder /opt/duckdb /opt/duckdb
+COPY --from=app-builder --chown=${UID}:${GID} /app /app
+
 CMD [ "duckdb" ]
