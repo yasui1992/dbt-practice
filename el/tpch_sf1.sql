@@ -1,14 +1,12 @@
-ATTACH 'db/raw.duckdb' AS db;
-
 INSTALL tpch;
 LOAD tpch;
 CALL dbgen(sf = 1);
 
-CREATE OR REPLACE TABLE db.customer AS SELECT * FROM customer;
-CREATE OR REPLACE TABLE db.lineitem AS SELECT * FROM lineitem;
-CREATE OR REPLACE TABLE db.nation AS SELECT * FROM nation;
-CREATE OR REPLACE TABLE db.orders AS SELECT * FROM orders;
-CREATE OR REPLACE TABLE db.part AS SELECT * FROM part;
-CREATE OR REPLACE TABLE db.partsupp AS SELECT * FROM partsupp;
-CREATE OR REPLACE TABLE db.region AS SELECT * FROM region;
-CREATE OR REPLACE TABLE db.supplier AS SELECT * FROM supplier;
+COPY (SELECT * FROM customer) TO 'data/raw/customer.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM lineitem) TO 'data/raw/lineitem.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM nation) TO 'data/raw/nation.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM orders) TO 'data/raw/orders.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM part) TO 'data/raw/part.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM partsupp) TO 'data/raw/partsupp.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM region) TO 'data/raw/region.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM supplier) TO 'data/raw/supplier.parquet' (FORMAT PARQUET);
