@@ -49,12 +49,15 @@ COPY . /app
 
 
 FROM python-nonroot AS app-final
+WORKDIR /app
+
+ENV DBT_PROFILES_DIR=/app/dbt \
+    DBT_PROJECT_DIR=/app/dbt
 
 COPY --from=app-builder /usr/bin/git /usr/bin/git
 COPY --from=app-builder /usr/bin/uv /usr/bin/uvx /usr/bin/
 COPY --from=app-builder --chown=${UID}:${GID} /app /app
 
-WORKDIR /app/dbt
 CMD [ "dbt", "debug" ]
 
 
@@ -80,4 +83,4 @@ WORKDIR /app
 COPY --from=duckdb-builder /opt/duckdb /opt/duckdb
 COPY --from=app-builder --chown=${UID}:${GID} /app /app
 
-CMD [ "duckdb" ]
+ENTRYPOINT [ "duckdb" ]
