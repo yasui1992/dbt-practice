@@ -1,4 +1,4 @@
 *
 !.gitignore
-!raw
-!raw/.gitkeep
+!lake
+!lake/.gitkeep
