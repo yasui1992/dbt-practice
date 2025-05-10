@@ -32,7 +32,7 @@ RUN mkdir -p /opt/duckdb/bin \
  && chmod +x /opt/duckdb/bin/duckdb
 
 
-FROM python-base AS app-builder
+FROM python-base AS dbt-builder
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # Require Git for dbt operations
@@ -50,9 +50,9 @@ COPY . /app
 
 
 FROM python-nonroot AS dbt-final
-COPY --from=app-builder /usr/bin/git /usr/bin/git
-COPY --from=app-builder /usr/bin/uv /usr/bin/uvx /usr/bin/
-COPY --from=app-builder --chown=${UID}:${GID} /app /app
+COPY --from=dbt-builder /usr/bin/git /usr/bin/git
+COPY --from=dbt-builder /usr/bin/uv /usr/bin/uvx /usr/bin/
+COPY --from=dbt-builder --chown=${UID}:${GID} /app /app
 
 ENV DBT_PROFILES_DIR=/app/dbt \
     DBT_PROJECT_DIR=/app/dbt
@@ -63,7 +63,7 @@ ENTRYPOINT [ "dbt" ]
 
 FROM python-nonroot AS duckdb-final
 COPY --from=duckdb-builder /opt/duckdb /opt/duckdb
-COPY --from=app-builder --chown=${UID}:${GID} /app /app
+COPY --from=dbt-builder --chown=${UID}:${GID} /app /app
 
 WORKDIR /app
 ENTRYPOINT [ "duckdb" ]
