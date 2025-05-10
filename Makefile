@@ -2,10 +2,11 @@
 	build-dbt \
 	build-duckdb \
 	run-dbt-debug \
-	run-duckdb \
-	run-el \
+	run-duckdb-cli \
+	run-duckdb-el \
 	up-dbt-debug \
-	up-duckdb up-el
+	up-duckdb-cli \
+	up-duckdb-el
 
 
 build-dbt:
@@ -29,7 +30,7 @@ run-dbt-debug:
 	dbt-practice-dbt \
 	debug
 
-run-duckdb:
+run-duckdb-cli:
 	@docker run \
 	--name dbt-practice-duckdb \
 	--rm \
@@ -37,7 +38,7 @@ run-duckdb:
 	-it \
 	dbt-practice-duckdb
 
-run-el:
+run-duckdb-el:
 	@docker run \
 	--name dbt-practice-duckdb \
 	--rm \
@@ -47,5 +48,5 @@ run-el:
 	-c ".read el/tpch_sf1.sql"
 
 up-dbt-debug: build-dbt run-dbt-debug
-up-duckdb: build-duckdb run-duckdb
-up-el: build-duckdb run-el
+up-duckdb-cli: build-duckdb run-duckdb-cli
+up-duckdb-el: build-duckdb run-duckdb-el
