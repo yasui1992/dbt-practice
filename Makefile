@@ -1,4 +1,4 @@
-.PHONY: build-dbt build-duckdb run-dbt run-duckdb run-el up-dbt up-duckdb up-el
+.PHONY: build-dbt build-duckdb run-dbt-debug run-duckdb run-el up-dbt-debug up-duckdb up-el
 
 
 build-dbt:
@@ -15,11 +15,12 @@ build-duckdb:
 	-t dbt-practice-duckdb \
 	.
 
-run-dbt:
+run-dbt-debug:
 	@docker run \
 	--name dbt-practice-dbt \
 	--rm \
-	dbt-practice-dbt
+	dbt-practice-dbt \
+	debug
 
 run-duckdb:
 	@docker run \
@@ -38,6 +39,6 @@ run-el:
 	dbt-practice-duckdb \
 	-c ".read el/tpch_sf1.sql"
 
-up-dbt: build-dbt run-dbt
+up-dbt-debug: build-dbt run-dbt-debug
 up-duckdb: build-duckdb run-duckdb
 up-el: build-duckdb run-el

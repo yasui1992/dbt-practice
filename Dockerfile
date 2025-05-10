@@ -55,7 +55,7 @@ COPY --from=app-builder /usr/bin/uv /usr/bin/uvx /usr/bin/
 COPY --from=app-builder --chown=${UID}:${GID} /app /app
 
 WORKDIR /app/dbt
-CMD [ "dbt", "debug" ]
+ENTRYPOINT [ "dbt" ]
 
 
 FROM python-nonroot AS duckdb-final
