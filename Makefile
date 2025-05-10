@@ -1,4 +1,11 @@
-.PHONY: build-dbt build-duckdb run-dbt-debug run-duckdb run-el up-dbt-debug up-duckdb up-el
+.PHONY: \
+	build-dbt \
+	build-duckdb \
+	run-dbt-debug \
+	run-duckdb \
+	run-el \
+	up-dbt-debug \
+	up-duckdb up-el
 
 
 build-dbt:
