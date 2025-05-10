@@ -1,16 +1,3 @@
-.PHONY: \
-	build-dbt \
-	build-duckdb \
-	run-dbt-debug \
-	run-duckdb-cli \
-	run-duckdb-el \
-	run-duckdb-init-db \
-	up-dbt-debug \
-	up-duckdb-cli \
-	up-duckdb-el \
-	up-duckdb-init-db
-
-
 build-dbt:
 	@docker build \
 	--platform linux/x86_64 \
