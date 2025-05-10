@@ -31,9 +31,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   dbt_practice:
-    stg:
+    staging:
       +materialized: view
-      +tags: stg
+      +tags: staging
 
 flags:
   send_anonymous_usage_stats: false
