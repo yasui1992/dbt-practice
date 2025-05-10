@@ -1,11 +1,19 @@
-.PHONY: build-app build-duckdb run-app run-duckdb run-el up-app up-duckdb up-el
+.PHONY: \
+	build-dbt \
+	build-duckdb \
+	run-dbt-debug \
+	run-duckdb-cli \
+	run-duckdb-el \
+	up-dbt-debug \
+	up-duckdb-cli \
+	up-duckdb-el
 
 
-build-app:
+build-dbt:
 	@docker build \
 	--platform linux/x86_64 \
-	--target app-final \
-	-t dbt-practice-app \
+	--target dbt-final \
+	-t dbt-practice-dbt \
 	.
 
 build-duckdb:
@@ -15,13 +23,14 @@ build-duckdb:
 	-t dbt-practice-duckdb \
 	.
 
-run-app:
+run-dbt-debug:
 	@docker run \
-	--name dbt-practice-app \
+	--name dbt-practice-dbt \
 	--rm \
-	dbt-practice-app
+	dbt-practice-dbt \
+	debug
 
-run-duckdb:
+run-duckdb-cli:
 	@docker run \
 	--name dbt-practice-duckdb \
 	--rm \
@@ -29,7 +38,7 @@ run-duckdb:
 	-it \
 	dbt-practice-duckdb
 
-run-el:
+run-duckdb-el:
 	@docker run \
 	--name dbt-practice-duckdb \
 	--rm \
@@ -38,6 +47,6 @@ run-el:
 	dbt-practice-duckdb \
 	-c ".read el/tpch_sf1.sql"
 
-up-app: build-app run-app
-up-duckdb: build-duckdb run-duckdb
-up-el: build-duckdb run-el
+up-dbt-debug: build-dbt run-dbt-debug
+up-duckdb-cli: build-duckdb run-duckdb-cli
+up-duckdb-el: build-duckdb run-duckdb-el
