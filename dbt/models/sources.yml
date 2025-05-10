@@ -1,5 +1,5 @@
 sources:
-  - name: lake
+  - name: tpch_sf1
     meta:
       external_location: "/tmp/data/lake/{name}.parquet"
     tables:

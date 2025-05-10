@@ -1,5 +1,5 @@
 models:
-  - name: stg_lake__customer
+  - name: stg_tpch_sf1__customer
     columns:
       - name: custkey
         tests:
