@@ -54,6 +54,9 @@ COPY --from=app-builder /usr/bin/git /usr/bin/git
 COPY --from=app-builder /usr/bin/uv /usr/bin/uvx /usr/bin/
 COPY --from=app-builder --chown=${UID}:${GID} /app /app
 
+ENV DBT_PROFILES_DIR=/app/dbt \
+    DBT_PROJECT_DIR=/app/dbt
+
 WORKDIR /app/dbt
 ENTRYPOINT [ "dbt" ]
 
