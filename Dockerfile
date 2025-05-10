@@ -49,7 +49,7 @@ RUN --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
 COPY . /app
 
 
-FROM python-nonroot AS app-final
+FROM python-nonroot AS dbt-final
 COPY --from=app-builder /usr/bin/git /usr/bin/git
 COPY --from=app-builder /usr/bin/uv /usr/bin/uvx /usr/bin/
 COPY --from=app-builder --chown=${UID}:${GID} /app /app
