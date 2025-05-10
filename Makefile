@@ -25,7 +25,7 @@ run-duckdb:
 	@docker run \
 	--name dbt-practice-duckdb \
 	--rm \
-	-v ./db:/app/db \
+	-v ./data:/tmp/dbt/data \
 	-it \
 	dbt-practice-duckdb
 
@@ -34,7 +34,7 @@ run-el:
 	@docker run \
 	--name dbt-practice-duckdb \
 	--rm \
-	-v ./db:/app/db \
+	-v ./data:/tmp/dbt/data \
 	-i \
 	dbt-practice-duckdb \
 	duckdb -c ".read el/tpch_sf1.sql"

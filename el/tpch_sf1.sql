@@ -1,14 +1,12 @@
-ATTACH 'db/raw.duckdb' AS db;
-
 INSTALL tpch;
 LOAD tpch;
 CALL dbgen(sf = 1);
 
-CREATE OR REPLACE TABLE db.customer AS SELECT * FROM customer;
-CREATE OR REPLACE TABLE db.lineitem AS SELECT * FROM lineitem;
-CREATE OR REPLACE TABLE db.nation AS SELECT * FROM nation;
-CREATE OR REPLACE TABLE db.orders AS SELECT * FROM orders;
-CREATE OR REPLACE TABLE db.part AS SELECT * FROM part;
-CREATE OR REPLACE TABLE db.partsupp AS SELECT * FROM partsupp;
-CREATE OR REPLACE TABLE db.region AS SELECT * FROM region;
-CREATE OR REPLACE TABLE db.supplier AS SELECT * FROM supplier;
+COPY (SELECT * FROM customer) TO '/tmp/dbt/data/lake/customer.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM lineitem) TO '/tmp/dbt/data/lake/lineitem.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM nation) TO '/tmp/dbt/data/lake/nation.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM orders) TO '/tmp/dbt/data/lake/orders.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM part) TO '/tmp/dbt/data/lake/part.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM partsupp) TO '/tmp/dbt/data/lake/partsupp.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM region) TO '/tmp/dbt/data/lake/region.parquet' (FORMAT PARQUET);
+COPY (SELECT * FROM supplier) TO '/tmp/dbt/data/lake/supplier.parquet' (FORMAT PARQUET);
