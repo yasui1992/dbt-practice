@@ -1,0 +1,14 @@
+models:
+  - name: stg_lake__customer
+    columns:
+      - name: custkey
+        tests:
+          - not_null
+          - unique
+      - name: nationkey
+      - name: name
+      - name: address
+      - name: phone
+      - name: mktsegment
+      - name: comment
+      - name: acctbal

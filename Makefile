@@ -29,6 +29,15 @@ run-dbt-run:
 	dbt-practice-dbt \
 	run
 
+run-dbt-test:
+	@docker run \
+	--name dbt-practice-dbt \
+	--rm \
+	-v ./dbt:/app/dbt \
+	-v ./data:/tmp/data \
+	dbt-practice-dbt \
+	test
+
 run-dbt-docs-generate:
 	@docker run \
 	--name dbt-practice-dbt \
@@ -78,6 +87,7 @@ run-duckdb-init-db:
 
 up-dbt-debug: build-dbt run-dbt-debug
 up-dbt-run: build-dbt run-dbt-run
+up-dbt-test: build-dbt run-dbt-test
 up-dbt-docs-serve: \
 	build-dbt \
 	run-dbt-docs-generate \
