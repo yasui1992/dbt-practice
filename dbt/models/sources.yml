@@ -1,0 +1,6 @@
+sources:
+  - name: lake
+    meta:
+      external_location: "/tmp/data/lake/{name}.parquet"
+    tables:
+      - name: customer

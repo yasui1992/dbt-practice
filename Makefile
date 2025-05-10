@@ -4,9 +4,11 @@
 	run-dbt-debug \
 	run-duckdb-cli \
 	run-duckdb-el \
+	run-duckdb-init-db \
 	up-dbt-debug \
 	up-duckdb-cli \
-	up-duckdb-el
+	up-duckdb-el \
+	up-duckdb-init-db
 
 
 build-dbt:
@@ -47,6 +49,18 @@ run-duckdb-el:
 	dbt-practice-duckdb \
 	-c ".read el/tpch_sf1.sql"
 
+run-duckdb-init-db:
+	@rm -f ./data/mart/dbt.db
+	@docker run \
+	--name dbt-practice-duckdb \
+	--rm \
+	-v ./data:/tmp/dbt/data \
+	-i \
+	dbt-practice-duckdb \
+	-c ".open /tmp/dbt/data/mart/dbt.db"
+
+
 up-dbt-debug: build-dbt run-dbt-debug
 up-duckdb-cli: build-duckdb run-duckdb-cli
 up-duckdb-el: build-duckdb run-duckdb-el
+up-duckdb-init-db: build-duckdb run-duckdb-init-db
