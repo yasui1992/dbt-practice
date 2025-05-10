@@ -37,7 +37,7 @@ run-el:
 	-v ./data:/tmp/dbt/data \
 	-i \
 	dbt-practice-duckdb \
-	duckdb -c ".read el/tpch_sf1.sql"
+	-c ".read el/tpch_sf1.sql"
 
 up-app: build-app run-app
 up-duckdb: build-duckdb run-duckdb

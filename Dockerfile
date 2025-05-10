@@ -19,7 +19,7 @@ USER ${USERNAME}
 
 
 FROM python-base AS duckdb-builder
-ARG DUCKDB_CLI_DIST_URL="https://github.com/duckdb/duckdb/releases/download/v1.2.2/duckdb_cli-linux-amd64.gz"
+ARG DUCKDB_VERSION=1.2.2
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get update \
@@ -27,6 +27,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     curl
 
 RUN mkdir -p /opt/duckdb/bin \
+ && DUCKDB_CLI_DIST_URL="https://github.com/duckdb/duckdb/releases/download/v${DUCKDB_VERSION}/duckdb_cli-linux-amd64.gz" \
  && curl -L ${DUCKDB_CLI_DIST_URL} | zcat > /opt/duckdb/bin/duckdb \
  && chmod +x /opt/duckdb/bin/duckdb
 
@@ -49,7 +50,6 @@ COPY . /app
 
 
 FROM python-nonroot AS app-final
-
 COPY --from=app-builder /usr/bin/git /usr/bin/git
 COPY --from=app-builder /usr/bin/uv /usr/bin/uvx /usr/bin/
 COPY --from=app-builder --chown=${UID}:${GID} /app /app
@@ -59,10 +59,8 @@ CMD [ "dbt", "debug" ]
 
 
 FROM python-nonroot AS duckdb-final
-
 COPY --from=duckdb-builder /opt/duckdb /opt/duckdb
-
 COPY --from=app-builder --chown=${UID}:${GID} /app /app
 
 WORKDIR /app
-CMD [ "duckdb" ]
+ENTRYPOINT [ "duckdb" ]
