@@ -1,10 +1,12 @@
+.PHONY: build-app build-duckdb run-app run-duckdb run-el up-app up-duckdb up-el
+
+
 build-app:
 	@docker build \
 	--platform linux/x86_64 \
 	--target app-final \
 	-t dbt-practice-app \
 	.
-
 
 build-duckdb:
 	@docker build \
@@ -13,13 +15,11 @@ build-duckdb:
 	-t dbt-practice-duckdb \
 	.
 
-
 run-app:
 	@docker run \
 	--name dbt-practice-app \
 	--rm \
 	dbt-practice-app
-
 
 run-duckdb:
 	@docker run \
@@ -28,7 +28,6 @@ run-duckdb:
 	-v ./data:/tmp/dbt/data \
 	-it \
 	dbt-practice-duckdb
-
 
 run-el:
 	@docker run \
