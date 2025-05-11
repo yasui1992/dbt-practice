@@ -89,7 +89,7 @@ run-duckdb-init-db:
 up-dbt-debug: build-dbt run-dbt-debug
 up-dbt-run: build-dbt run-dbt-run
 up-dbt-test: build-dbt run-dbt-test
-up-dbt-docs-serve: \
+up-dbt-docs: \
 	build-dbt \
 	run-dbt-docs-generate \
 	run-dbt-docs-serve
