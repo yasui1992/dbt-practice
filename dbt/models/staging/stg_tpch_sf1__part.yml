@@ -1,0 +1,12 @@
+models:
+  - name: stg_tpch_sf1__part
+    columns:
+      - name: part_key
+      - name: name
+      - name: manufacturer
+      - name: brand
+      - name: type
+      - name: size
+      - name: container
+      - name: retail_price
+      - name: comment

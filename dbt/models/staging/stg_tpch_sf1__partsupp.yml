@@ -1,0 +1,8 @@
+models:
+  - name: stg_tpch_sf1__partsupp
+    columns:
+      - name: part_key
+      - name: supplier_key
+      - name: available_quantity
+      - name: supply_cost
+      - name: comment

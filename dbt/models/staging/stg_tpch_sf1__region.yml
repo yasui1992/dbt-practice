@@ -1,0 +1,6 @@
+models:
+  - name: stg_tpch_sf1__region
+    columns:
+      - name: region_key
+      - name: name
+      - name: comment

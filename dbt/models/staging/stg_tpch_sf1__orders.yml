@@ -1,0 +1,12 @@
+models:
+  - name: stg_tpch_sf1__orders
+    columns:
+      - name: order_key
+      - name: customer_key
+      - name: order_status
+      - name: order_priority
+      - name: clerk
+      - name: comment
+      - name: total_price
+      - name: ship_priority
+      - name: order_date

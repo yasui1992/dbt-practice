@@ -1,0 +1,7 @@
+models:
+  - name: stg_tpch_sf1__nation
+    columns:
+      - name: nation_key
+      - name: name
+      - name: region_key
+      - name: comment

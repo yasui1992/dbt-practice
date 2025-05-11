@@ -63,7 +63,8 @@ run-duckdb-cli:
 	--rm \
 	-v ./data:/tmp/data \
 	-it \
-	dbt-practice-duckdb
+	dbt-practice-duckdb \
+	/tmp/data/mart/dbt.duckdb
 
 run-duckdb-el:
 	@docker run \

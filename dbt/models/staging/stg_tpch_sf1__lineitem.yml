@@ -1,0 +1,20 @@
+models:
+  - name: stg_tpch_sf1__lineitem
+    columns:
+      - name: orderkey
+      - name: linenumber
+      - name: partkey
+      - name: suppkey
+      - name: nationkey
+      - name: linestatus
+      - name: shipinstruct
+      - name: shipmode
+      - name: comment
+      - name: quantity
+      - name: extendedprice
+      - name: discount
+      - name: tax
+      - name: returnflag
+      - name: shipdate
+      - name: commitdate
+      - name: receiptdate

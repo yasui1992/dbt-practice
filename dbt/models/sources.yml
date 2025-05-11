@@ -4,3 +4,10 @@ sources:
       external_location: "/tmp/data/lake/{name}.parquet"
     tables:
       - name: customer
+      - name: lineitem
+      - name: nation
+      - name: orders
+      - name: part
+      - name: partsupp
+      - name: region
+      - name: supplier
