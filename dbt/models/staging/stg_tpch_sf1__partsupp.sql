@@ -5,15 +5,15 @@ source as (
 renamed as (
     select
         -- primary keys
-        ps_partkey as part_key,
-        ps_suppkey as supplier_key,
-
-        -- numerics
-        ps_availqty as available_quantity,
-        ps_supplycost as supply_cost,
+        ps_partkey as partkey,
+        ps_suppkey as suppkey,
 
         -- strings
-        ps_comment as comment
-    from source
+        ps_comment as comment,
+
+        -- numerics
+        ps_availqty as availqty,
+        ps_supplycost as supplycost,
+        from source
 )
 select * from renamed

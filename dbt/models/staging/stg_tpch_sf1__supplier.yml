@@ -1,10 +1,13 @@
 models:
   - name: stg_tpch_sf1__supplier
     columns:
-      - name: supplier_key
+      - name: suppkey
+        tests:
+          - not_null
+          - unique
       - name: name
       - name: address
       - name: phone
       - name: comment
-      - name: nation_key
-      - name: account_balance
+      - name: nationkey
+      - name: accbal

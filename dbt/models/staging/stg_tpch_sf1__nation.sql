@@ -5,10 +5,10 @@ source as (
 renamed as (
     select
         -- primary key
-        n_nationkey as nation_key,
+        n_nationkey as nationkey,
 
         -- foreign key
-        n_regionkey as region_key,
+        n_regionkey as regionkey,
 
         -- strings
         n_name as "name",

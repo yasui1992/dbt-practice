@@ -1,6 +1,9 @@
 models:
   - name: stg_tpch_sf1__region
     columns:
-      - name: region_key
+      - name: regionkey
+        tests:
+          - not_null
+          - unique
       - name: name
       - name: comment

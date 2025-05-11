@@ -5,10 +5,10 @@ source as (
 renamed as (
     select
         -- primary key
-        r_regionkey as region_key,
+        r_regionkey as regionkey,
 
         -- strings
-        r_name as name,
+        r_name as "name",
         r_comment as comment
     from source
 )

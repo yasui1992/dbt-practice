@@ -5,23 +5,23 @@ source as (
 renamed as (
     select
         -- primary key
-        o_orderkey as order_key,
+        o_orderkey as orderkey,
 
         -- foreign key
-        o_custkey as customer_key,
+        o_custkey as custkey,
 
         -- strings
-        o_orderstatus as order_status,
-        o_orderpriority as order_priority,
+        o_orderstatus as orderstatus,
+        o_orderpriority as orderpriority,
         o_clerk as clerk,
         o_comment as comment,
 
         -- numerics
-        o_totalprice as total_price,
-        o_shippriority as ship_priority,
+        o_totalprice as totalprice,
+        o_shippriority as shippriority,
 
         -- dates
-        o_orderdate as order_date,
+        o_orderdate as orderdate,
     from source
 )
 select * from renamed

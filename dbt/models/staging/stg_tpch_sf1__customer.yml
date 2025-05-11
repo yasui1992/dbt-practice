@@ -6,6 +6,10 @@ models:
           - not_null
           - unique
       - name: nationkey
+        tests:
+          - relationships:
+              to: ref('stg_tpch_sf1__nation')
+              field: nationkey
       - name: name
       - name: address
       - name: phone

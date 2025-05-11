@@ -1,8 +1,23 @@
 models:
   - name: stg_tpch_sf1__partsupp
+    tests:
+    - dbt_utils.unique_combination_of_columns:
+        combination_of_columns:
+          - partkey
+          - suppkey
     columns:
-      - name: part_key
-      - name: supplier_key
-      - name: available_quantity
-      - name: supply_cost
+      - name: partkey
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_tpch_sf1__part')
+              field: partkey
+      - name: suppkey
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_tpch_sf1__supplier')
+              field: suppkey
       - name: comment
+      - name: availqty
+      - name: supplycost
