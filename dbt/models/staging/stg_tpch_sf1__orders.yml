@@ -1,0 +1,19 @@
+models:
+  - name: stg_tpch_sf1__orders
+    columns:
+      - name: orderkey
+        tests:
+          - not_null
+          - unique
+      - name: custkey
+        tests:
+          - relationships:
+              to: ref('stg_tpch_sf1__customer')
+              field: custkey
+      - name: orderstatus
+      - name: orderpriority
+      - name: clerk
+      - name: comment
+      - name: totalprice
+      - name: shippriority
+      - name: orderdate

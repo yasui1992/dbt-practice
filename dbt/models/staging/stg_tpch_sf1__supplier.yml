@@ -1,0 +1,13 @@
+models:
+  - name: stg_tpch_sf1__supplier
+    columns:
+      - name: suppkey
+        tests:
+          - not_null
+          - unique
+      - name: name
+      - name: address
+      - name: phone
+      - name: comment
+      - name: nationkey
+      - name: accbal

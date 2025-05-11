@@ -1,0 +1,15 @@
+models:
+  - name: stg_tpch_sf1__part
+    columns:
+      - name: partkey
+        tests:
+          - not_null
+          - unique
+      - name: name
+      - name: mfgr
+      - name: brand
+      - name: type
+      - name: container
+      - name: comment
+      - name: size
+      - name: retailprice

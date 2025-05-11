@@ -1,0 +1,40 @@
+models:
+  - name: stg_tpch_sf1__lineitem
+    tests:
+    - dbt_utils.unique_combination_of_columns:
+        combination_of_columns:
+          - orderkey
+          - linenumber
+    columns:
+      - name: orderkey
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_tpch_sf1__orders')
+              field: orderkey
+      - name: linenumber
+        tests:
+          - not_null
+      - name: partkey
+        tests:
+          - relationships:
+              to: ref('stg_tpch_sf1__part')
+              field: partkey
+      - name: suppkey
+        tests:
+          - relationships:
+              to: ref('stg_tpch_sf1__supplier')
+              field: suppkey
+      - name: nationkey
+      - name: linestatus
+      - name: shipinstruct
+      - name: shipmode
+      - name: comment
+      - name: quantity
+      - name: extendedprice
+      - name: discount
+      - name: tax
+      - name: returnflag
+      - name: shipdate
+      - name: commitdate
+      - name: receiptdate

@@ -1,0 +1,18 @@
+models:
+  - name: stg_tpch_sf1__customer
+    columns:
+      - name: custkey
+        tests:
+          - not_null
+          - unique
+      - name: nationkey
+        tests:
+          - relationships:
+              to: ref('stg_tpch_sf1__nation')
+              field: nationkey
+      - name: name
+      - name: address
+      - name: phone
+      - name: mktsegment
+      - name: comment
+      - name: acctbal

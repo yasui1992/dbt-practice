@@ -1,0 +1,14 @@
+models:
+  - name: stg_tpch_sf1__nation
+    columns:
+      - name: nationkey
+        tests:
+          - not_null
+          - unique
+      - name: regionkey
+        tests:
+          - relationships:
+              to: ref('stg_tpch_sf1__region')
+              field: regionkey
+      - name: name
+      - name: comment

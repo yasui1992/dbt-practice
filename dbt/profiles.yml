@@ -2,6 +2,7 @@ dbt_practice:
   outputs:
     dev:
       type: duckdb
+      path: /tmp/data/mart/dbt.duckdb
       threads: 1
 
   target: dev

@@ -29,3 +29,9 @@ __pycache__/
 
 # Local data directory
 data/
+
+# Local dbt ignored directory
+dbt/logs/
+dbt/dbt_packages/
+dbt/target/
+dbt_tmp/
