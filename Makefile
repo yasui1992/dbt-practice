@@ -24,7 +24,7 @@ run-dbt-run:
 	@docker run \
 	--name dbt-practice-dbt \
 	--rm \
-	-v ./dbt:/app/dbt \
+	-v ./dbt_tmp/target:/tmp/dbt/target \
 	-v ./data:/tmp/data \
 	dbt-practice-dbt \
 	run
@@ -33,7 +33,7 @@ run-dbt-test:
 	@docker run \
 	--name dbt-practice-dbt \
 	--rm \
-	-v ./dbt:/app/dbt \
+	-v ./dbt_tmp/target:/tmp/dbt/target \
 	-v ./data:/tmp/data \
 	dbt-practice-dbt \
 	test
@@ -42,7 +42,7 @@ run-dbt-docs-generate:
 	@docker run \
 	--name dbt-practice-dbt \
 	--rm \
-	-v ./dbt:/app/dbt \
+	-v ./dbt_tmp/target:/tmp/dbt/target \
 	-v ./data:/tmp/data \
 	dbt-practice-dbt \
 	docs generate
@@ -51,7 +51,7 @@ run-dbt-docs-serve:
 	@docker run \
 	--name dbt-practice-dbt \
 	--rm \
-	-v ./dbt:/app/dbt \
+	-v ./dbt_tmp/target:/tmp/dbt/target \
 	-v ./data:/tmp/data \
 	-p 8080:8080 \
 	dbt-practice-dbt \

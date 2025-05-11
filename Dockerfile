@@ -57,7 +57,9 @@ COPY --from=dbt-builder /usr/bin/uv /usr/bin/uvx /usr/bin/
 COPY --from=dbt-builder --chown=${UID}:${GID} /app /app
 
 ENV DBT_PROFILES_DIR=/app/dbt \
-    DBT_PROJECT_DIR=/app/dbt
+    DBT_PROJECT_DIR=/app/dbt \
+    DBT_LOG_PATH=/tmp/dbt/logs \
+    DBT_TARGET_PATH=/tmp/dbt/target
 
 RUN dbt deps
 

@@ -34,3 +34,4 @@ data/
 dbt/logs/
 dbt/dbt_packages/
 dbt/target/
+dbt_tmp/
