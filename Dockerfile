@@ -50,6 +50,8 @@ COPY . /app
 
 
 FROM python-nonroot AS dbt-final
+WORKDIR /app
+
 COPY --from=dbt-builder /usr/bin/git /usr/bin/git
 COPY --from=dbt-builder /usr/bin/uv /usr/bin/uvx /usr/bin/
 COPY --from=dbt-builder --chown=${UID}:${GID} /app /app
@@ -57,13 +59,15 @@ COPY --from=dbt-builder --chown=${UID}:${GID} /app /app
 ENV DBT_PROFILES_DIR=/app/dbt \
     DBT_PROJECT_DIR=/app/dbt
 
-WORKDIR /app/dbt
+RUN dbt deps
+
 ENTRYPOINT [ "dbt" ]
 
 
 FROM python-nonroot AS duckdb-final
+WORKDIR /app
+
 COPY --from=duckdb-builder /opt/duckdb /opt/duckdb
 COPY --from=dbt-builder --chown=${UID}:${GID} /app /app
 
-WORKDIR /app
 ENTRYPOINT [ "duckdb" ]
